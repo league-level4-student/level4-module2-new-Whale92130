@@ -16,13 +16,15 @@ public class Cereal extends Food{
 
 	@Override
 	public JLabel getFood() {
-		// TODO Auto-generated method stub
-		return new JLabel(loadImage(this.item));
+		JLabel label = new JLabel(loadImage(this.item));
+		label.setText("Cereal");
+		return label;
 	}
 
 	@Override
 	public JLabel getProduct() {
-		// TODO Auto-generated method stub
-		return new JLabel(loadImage(this.item));
+		JLabel label = new JLabel(loadImage(this.item));
+		label.setText("Cereal");
+		return label;
 	}
 }

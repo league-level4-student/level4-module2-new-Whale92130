@@ -16,13 +16,15 @@ public class Toy extends NonFood {
 
 	@Override
 	public JLabel getNonFood() {
-		// TODO Auto-generated method stub
-		return new JLabel(loadImage(this.item));
+		JLabel label = new JLabel(loadImage(this.item));
+		label.setText("Toy");
+		return label;
 	}
 
 	@Override
 	public JLabel getProduct() {
-		// TODO Auto-generated method stub
-		return new JLabel(loadImage(this.item));
+		JLabel label = new JLabel(loadImage(this.item));
+		label.setText("Toy");
+		return label;
 	}
 }
