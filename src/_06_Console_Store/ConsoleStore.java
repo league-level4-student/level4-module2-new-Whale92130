@@ -1,5 +1,13 @@
 package _06_Console_Store;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import _02_Generics_Store.Cart;
+import _02_Generics_Store.Product;
+
 public class ConsoleStore {
 
     /*
@@ -37,7 +45,9 @@ public class ConsoleStore {
      */
 
     public static void main(String[] args) {
-
+    	goShopping shop = new goShopping();
+    	shop.shop();
     }
+
 
 }

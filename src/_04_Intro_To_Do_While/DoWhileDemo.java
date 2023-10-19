@@ -42,23 +42,26 @@ public class DoWhileDemo {
         Random rand = new Random();
 
         String again;
-
-        while (again.equals("y")) {
-            int flip = rand.nextInt(2);
+        
+        do {
+        	int flip = rand.nextInt(2);
             String coin;
 
             if (flip == 1)
                 coin = "HEADS";
             else
                 coin = "TAILS";
-
+            again = scan.next();
             System.out.println("You flip a coin and it is... " + coin);
 
             System.out.print("Would you like to flip again (y/n)? ");
-            again = scan.next();
-        }
+        } while (again.equals("y"));
+            
+           
+    
 
         scan.close();
     }
 
 }
+
