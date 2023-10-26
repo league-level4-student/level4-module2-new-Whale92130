@@ -17,14 +17,14 @@ public class Cereal extends Food{
 	@Override
 	public JLabel getFood() {
 		JLabel label = new JLabel(loadImage(this.item));
-		label.setText("Cereal");
+		label.setToolTipText("Cereal");
 		return label;
 	}
 
 	@Override
 	public JLabel getProduct() {
 		JLabel label = new JLabel(loadImage(this.item));
-		label.setText("Cereal");
+		label.setToolTipText("Cereal");
 		return label;
 	}
 }

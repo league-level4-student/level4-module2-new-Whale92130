@@ -17,14 +17,14 @@ public class Clothing extends NonFood{
 	@Override
 	public JLabel getNonFood() {
 		JLabel label = new JLabel(loadImage(this.item));
-		label.setText("Cloths");
+		label.setToolTipText("Cloths");
 		return label;
 	}
 
 	@Override
 	public JLabel getProduct() {
 		JLabel label = new JLabel(loadImage(this.item));
-		label.setText("Cloths");
+		label.setToolTipText("Cloths");
 		return label;
 	}
 }

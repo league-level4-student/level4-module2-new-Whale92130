@@ -1,7 +1,10 @@
 package _02_Generics_Store;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -14,8 +17,10 @@ import javax.swing.JPanel;
  */
 
 @SuppressWarnings("unchecked")
-public class Cart<T extends Product> {
+public class Cart<T extends Product> implements ActionListener {
 	private T[] cart;
+	JButton button = new JButton("Go Back");
+	JFrame frame = new JFrame();
 
 	public Cart() {
 		cart = (T[]) new Product[8];
@@ -34,8 +39,9 @@ public class Cart<T extends Product> {
 
 	// Displays everything currently in the cart
 	public void showCart() {
-		JFrame frame = new JFrame();
+
 		JPanel panel = new JPanel();
+		button.addActionListener(this);
 		frame.add(panel);
 		frame.setVisible(true);
 
@@ -44,6 +50,7 @@ public class Cart<T extends Product> {
 				panel.add(cart[i].getProduct());
 			}
 		}
+		panel.add(button);
 		frame.pack();
 
 	}
@@ -53,30 +60,40 @@ public class Cart<T extends Product> {
 
 	}
 
-	public ArrayList<Product> getItems() {
-		ArrayList<Product> items = new ArrayList<Product>();
-		for (int i = 0; i <= cart.length-1; i++) {
+	public ArrayList<String> getItems() {
+		ArrayList<String> items = new ArrayList<String>();
+		for (int i = 0; i <= cart.length - 1; i++) {
 			if (cart[i] != null) {
-				if (cart[i].getProduct().getText().equals("Candy")) {
-					items.add(new Candy());
+				if (cart[i].getProduct().getToolTipText().equals("Candy")) {
+					items.add("Candy");
+				} else if (cart[i].getProduct().getToolTipText().equals("Cereal")) {
+					items.add("Cereal");
+				} else if (cart[i].getProduct().getToolTipText().equals("Cloths")) {
+					items.add("Cloths");
+				} else if (cart[i].getProduct().getToolTipText().equals("Toys")) {
+					items.add("Toy");
 				}
-				else if (cart[i].getProduct().getText().equals("Cereal")) {
-					items.add(new Cereal());
-				}
-				else if (cart[i].getProduct().getText().equals("Cloths")) {
-					items.add(new Clothing());
-				}
-				else if (cart[i].getProduct().getText().equals("Toys")) {
-					items.add(new Toy());
-				}
-				
+
 			}
 
 		}
 		if (items.size() == 0) {
-		JOptionPane.showMessageDialog(null, "Thre are no items in the cart");
-		return null;
+			JOptionPane.showMessageDialog(null, "Thre are no items in the cart");
+			return null;
 		}
 		return items;
+	}
+
+	public void removeItem(int index) {
+		cart[index-1] = null;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource().equals(button)) {
+			frame.setVisible(false);
+			frame.dispose();
+		}
 	}
 }

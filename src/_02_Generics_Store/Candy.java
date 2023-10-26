@@ -18,14 +18,14 @@ public class Candy extends Food{
 	public JLabel getFood() {
 		// TODO Auto-generated method stub
 		JLabel label = new JLabel(loadImage(this.item));
-		label.setText("Candy");
+		label.setToolTipText("Candy");
 		return label;
 	}
 
 	@Override
 	public JLabel getProduct() {
 		JLabel label = new JLabel(loadImage(this.item));
-		label.setText("Candy");
+		label.setToolTipText("Candy");
 		return label;
 	}
 }
