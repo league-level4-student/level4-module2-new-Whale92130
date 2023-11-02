@@ -27,4 +27,7 @@ public class Cereal extends Food{
 		label.setToolTipText("Cereal");
 		return label;
 	}
+	public int getPrice() {
+		return 7;
+	}
 }

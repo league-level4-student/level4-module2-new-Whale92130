@@ -5,6 +5,7 @@ import java.util.Random;
 import javax.swing.JLabel;
 
 public class Candy extends Food{
+	int price = 5;
 	public Candy() {
 		if(new Random().nextBoolean()) {
 			this.item = "candy1.jpeg";
@@ -27,5 +28,8 @@ public class Candy extends Food{
 		JLabel label = new JLabel(loadImage(this.item));
 		label.setToolTipText("Candy");
 		return label;
+	}
+	public int getPrice() {
+		return 5;
 	}
 }

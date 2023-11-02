@@ -27,4 +27,7 @@ public class Toy extends NonFood {
 		label.setToolTipText("Toy");
 		return label;
 	}
+	public int getPrice() {
+		return 10;
+	}
 }

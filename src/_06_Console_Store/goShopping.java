@@ -47,7 +47,7 @@ public class goShopping implements ActionListener {
 		checkOut.addActionListener(this);
 		panel.add(moneyLabel);
 		frame.setVisible(true);
-		moneyLabel.setText("|$69.00|");
+		moneyLabel.setText("$69");
 		frame.pack();
 	}
 	@Override
@@ -109,21 +109,38 @@ public class goShopping implements ActionListener {
 			cart.removeItem(removeIndex);
 			
 		}
+		
 		if(e.getSource().equals(checkOut)) {
 			boolean canCheckOut = money < 0 ? false : true;
 			if (canCheckOut == true) {
-				//go here
-				//
-				/
-				/
-				/
-				///////
-				////
-				///
-				///
-				///
+				cart.showCart();
+				String prompt = "Items:           Price: \n";
+				for(int i = 0; i < cart.getItems().size(); i++) {
+					prompt += (i+1)+": " + cart.getItems().get(i) + "          -" + cart.getPrice(i) + "\n";
+				}
+				prompt += "--------------------\n";
+				prompt += "                      $69\n";
+				prompt += "Total:            -" + (69-money) + "\n";
+				prompt += "                      $" + money;
+				JOptionPane.showMessageDialog(null, prompt);
+				System.exit(0);
 			}
+			else {
+				int confirm = JOptionPane.showConfirmDialog(null, "You do not have enough money to purchase your items. \n Would you like to remove some items from yout cart?");
+				if (confirm == 0) {
+					removeItem();
+				}
+			}
+	moneyLabel.setText("$69.00");
+	}
+}
+	void removeItem() {
+		String prompt = "";
+		for(int i = 0; i < cart.getItems().size(); i++) {
+			prompt += (i+1)+": " + cart.getItems().get(i) + "\n";
 		}
-	moneyLabel.setText("|"+money+".00|");
+		String remove = JOptionPane.showInputDialog(prompt + "(give the number of the item you want to remove)");
+		int removeIndex = Integer.parseInt(remove);
+		cart.removeItem(removeIndex);
 	}
 }
