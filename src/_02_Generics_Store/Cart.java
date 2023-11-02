@@ -39,7 +39,7 @@ public class Cart<T extends Product> implements ActionListener {
 
 	// Displays everything currently in the cart
 	public void showCart() {
-
+		frame = new JFrame();
 		JPanel panel = new JPanel();
 		button.addActionListener(this);
 		frame.add(panel);
@@ -52,25 +52,39 @@ public class Cart<T extends Product> implements ActionListener {
 		}
 		panel.add(button);
 		frame.pack();
+		
+	}
+	public void showFinalCart() {
+		frame = new JFrame("What you Bought");
+		JPanel panel = new JPanel();
+		frame.add(panel);
+		frame.setVisible(true);
 
+		for (int i = 0; i < cart.length; i++) {
+			if (cart[i] != null) {
+				panel.add(cart[i].getProduct());
+			}
+		}
+		frame.pack();
+		
 	}
 
 	public int length() {
 		return cart.length;
 
 	}
-	public int getPrice(int i) {
+	public int getPrice(Product pro) {
 		
-		if (cart[i].getClass().getTypeName().equals("_02_Generics_Store.Candy")) {
+		if (pro.getClass().getTypeName().equals("_02_Generics_Store.Candy")) {
 			return 5;
 		}
-		else if (cart[i].getClass().getTypeName().equals("_02_Generics_Store.Cereal")) {
+		else if (pro.getClass().getTypeName().equals("_02_Generics_Store.Cereal")) {
 			return 7;
 		}
-		else if (cart[i].getClass().getTypeName().equals("_02_Generics_Store.Clothing")) {
+		else if (pro.getClass().getTypeName().equals("_02_Generics_Store.Clothing")) {
 			return 15;
 		}
-		else if (cart[i].getClass().getTypeName().equals("_02_Generics_Store.Toy")) {
+		else if (pro.getClass().getTypeName().equals("_02_Generics_Store.Toy")) {
 			return 10;
 		}
 		return -1;
@@ -81,16 +95,16 @@ public class Cart<T extends Product> implements ActionListener {
 		for (int i = 0; i < cart.length; i++) {
 			if (cart[i] != null) {
 				if (cart[i].getProduct().getToolTipText().equals("Candy")) {
-					System.out.println("added candy");
+					
 					items.add("Candy");
 				} else if (cart[i].getProduct().getToolTipText().equals("Cereal")) {
-					System.out.println("added cereal");
+					
 					items.add("Cereal");
 				} else if (cart[i].getProduct().getToolTipText().equals("Cloths")) {
-					System.out.println("added cloths");
+					
 					items.add("Cloths");
 				} else if (cart[i].getProduct().getToolTipText().equals("Toy")) {
-					System.out.println("added toy");
+					
 					items.add("Toy");
 				}
 			}
@@ -126,7 +140,7 @@ public class Cart<T extends Product> implements ActionListener {
 	}
 
 	public void removeItem(int index) {
-		cart[index-1] = null;
+		cart[index] = null;
 	}
 
 	@Override

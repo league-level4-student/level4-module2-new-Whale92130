@@ -34,7 +34,10 @@ public class goShopping implements ActionListener {
 	JButton cloths = new JButton("Add Cloths ($15)");
 	JButton toy = new JButton("Add Toys ($10)");
 	JButton exit = new JButton("Go Back");
+	String userName = "";
+
 	void shop() {
+		userName = JOptionPane.showInputDialog("What is your name?");
 		frame.add(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel.add(addItem);
@@ -50,23 +53,23 @@ public class goShopping implements ActionListener {
 		moneyLabel.setText("$69");
 		frame.pack();
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource().equals(addItem)) {
-			
+		if (e.getSource().equals(addItem)) {
+
 			JPanel panel = new JPanel();
-			
+
 			candy.addActionListener(this);
-			
+
 			cereal.addActionListener(this);
-			
+
 			cloths.addActionListener(this);
-			
+
 			toy.addActionListener(this);
-			
-			
+
 			exit.addActionListener(this);
-			
+
 			frame2.add(panel);
 			panel.add(candy);
 			panel.add(cereal);
@@ -75,71 +78,79 @@ public class goShopping implements ActionListener {
 			panel.add(exit);
 			frame2.pack();
 			frame2.setVisible(true);
-			}
+		}
 		if (e.getSource().equals(candy)) {
 			cart.add(new Candy());
-			money-=5;
+			money -= 5;
 		}
 		if (e.getSource().equals(cereal)) {
 			cart.add(new Cereal());
-			money-=7;
+			money -= 7;
 		}
 		if (e.getSource().equals(cloths)) {
 			cart.add(new Clothing());
-			money-=15;
+			money -= 15;
 		}
 		if (e.getSource().equals(toy)) {
 			cart.add(new Toy());
-			money-=10;
+			money -= 10;
 		}
 		if (e.getSource().equals(exit)) {
 			frame2.setVisible(false);
 			frame2.dispose();
 		}
-		if(e.getSource().equals(viewItems)) {
+		if (e.getSource().equals(viewItems)) {
 			cart.showCart();
-			}
-		if(e.getSource().equals(removeItem)) {
+		}
+		if (e.getSource().equals(removeItem)) {
 			String prompt = "";
-			for(int i = 0; i < cart.getItems().size(); i++) {
-				prompt += (i+1)+": " + cart.getItems().get(i) + "\n";
+			for (int i = 0; i < cart.getItems().size(); i++) {
+				prompt += (i + 1) + ": " + cart.getItems().get(i) + "\n";
 			}
 			String remove = JOptionPane.showInputDialog(prompt + "(give the number of the item you want to remove)");
-			int removeIndex = Integer.parseInt(remove);
+			int removeIndex = Integer.parseInt(remove) - 1;
 			cart.removeItem(removeIndex);
-			
+
 		}
-		
-		if(e.getSource().equals(checkOut)) {
-			//error when making cart after remove item
-			/
-			boolean canCheckOut = money < 0 ? false : true;
-			if (canCheckOut == true) {
-				cart.showCart();
-				String prompt = "Items:           Price: \n";
-				for(int i = 0; i < cart.getItems().size(); i++) {
-					prompt += (i+1)+": " + cart.getItems().get(i) + "          -" + cart.getPrice(i) + "\n";
+
+		if (e.getSource().equals(checkOut)) {
+
+			// error when making cart after remove item
+			if (cart.getItems().isEmpty() == false) {
+				boolean canCheckOut = money < 0 ? false : true;
+				if (canCheckOut == true) {
+					cart.showFinalCart();
+					String prompt = "    " + userName + "'s Receipt \n";
+					prompt += "Items:           Price: \n";
+					for (int i = 0; i < cart.getItems().size(); i++) {
+						prompt += (i + 1) + ": " + cart.getItems().get(i) + "          -"
+								+ cart.getPrice(cart.getProductItems().get(i)) + "\n";
+					}
+					prompt += "--------------------\n";
+					prompt += "                      $69\n";
+					prompt += "Total:            -" + (69 - money) + "\n";
+					prompt += "                      $" + money;
+					JOptionPane.showMessageDialog(null, prompt);
+					JOptionPane.showMessageDialog(null, "Thank You for shopping at the \n Generics Store");
+					System.exit(0);
 				}
-				prompt += "--------------------\n";
-				prompt += "                      $69\n";
-				prompt += "Total:            -" + (69-money) + "\n";
-				prompt += "                      $" + money;
-				JOptionPane.showMessageDialog(null, prompt);
-				System.exit(0);
-			}
-			else {
-				int confirm = JOptionPane.showConfirmDialog(null, "You do not have enough money to purchase your items. \n Would you like to remove some items from yout cart?");
-				if (confirm == 0) {
-					removeItem();
+
+				else {
+					int confirm = JOptionPane.showConfirmDialog(null,
+							"You do not have enough money to purchase your items. \n Would you like to remove some items from yout cart?");
+					if (confirm == 0) {
+						removeItem();
+					}
 				}
 			}
-	moneyLabel.setText("$69.00");
+			moneyLabel.setText("$69.00");
+		}
 	}
-}
+
 	void removeItem() {
 		String prompt = "";
-		for(int i = 0; i < cart.getItems().size(); i++) {
-			prompt += (i+1)+": " + cart.getItems().get(i) + "\n";
+		for (int i = 0; i < cart.getItems().size(); i++) {
+			prompt += (i + 1) + ": " + cart.getItems().get(i) + "\n";
 		}
 		String remove = JOptionPane.showInputDialog(prompt + "(give the number of the item you want to remove)");
 		int removeIndex = Integer.parseInt(remove);
