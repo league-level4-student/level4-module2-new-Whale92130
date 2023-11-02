@@ -111,6 +111,8 @@ public class goShopping implements ActionListener {
 		}
 		
 		if(e.getSource().equals(checkOut)) {
+			//error when making cart after remove item
+			/
 			boolean canCheckOut = money < 0 ? false : true;
 			if (canCheckOut == true) {
 				cart.showCart();
